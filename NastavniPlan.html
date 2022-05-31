@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Supit</title>
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <link
+      rel="stylesheet"
+      href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"
+    />
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script defer src="/js/nastavni-plan.js"></script>
+    <link rel="stylesheet" href="./css/nastavniPlan2.css" />
+  </head>
+  <!-- <body> -->
+  <script
+    type="module"
+    src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+  ></script>
+
+  <header class="heading">
+    <nav class="navigate">
+      <img
+        src="img/Algebra-logo.png"
+        alt="Algebra logo"
+        height="50"
+        width="50"
+      />
+      <a href="index.html"> <ion-icon name="home"></ion-icon> Početna </a>
+      <a href="O-nama.html">
+        <ion-icon name="chatbubbles"></ion-icon> O nama
+      </a>
+      <a href="Novosti.html">
+        <ion-icon name="information-circle"></ion-icon> Novosti
+      </a>
+      <a href="NastavniPlan.html">
+        <ion-icon name="newspaper"></ion-icon> Nastavni plan
+      </a>
+      <a id="contact-user"> <ion-icon name="mail"></ion-icon> Kontakt </a>
+    </nav>
+  </header>
+
+  <body class="telo">
+    <main>
+      <div>
+        <h1 class="naslov">Nastavni plan</h1>
+      </div>
+      <div class="sve">
+        <div class="lijevo">
+          <label for="intxt">Naziv kolegija: </label>
+          <input
+            type="text"
+            name="intxt"
+            id="intxt"
+            placeholder="Unesite naziv kolegija..."
+          />
+        </div>
+        <div class="desno">
+          <div id="content">
+            <div class="input-tablice"></div>
+            <div class="tablica">
+              <table>
+                <thead>
+                  <th style="width: 120px">Kolegij</th>
+                  <th style="width: 50px">ECTS</th>
+                  <th style="width: 50px">Sati</th>
+                  <th style="width: 50px">P</th>
+                  <th style="width: 50px">V</th>
+                  <th style="width: 50px">Tip</th>
+                  <th style="width: 50px"></th>
+                </thead>
+
+                <tbody></tbody>
+
+                <tfoot>
+                  <tr>
+                    <td>Ukupno:</td>
+                    <td class="total" id="ectsUkupno"></td>
+                    <td class="total" id="satiUkupno"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <h1>BUDI IZVRSTAN U ONOM ŠTO VOLIŠ</h1>
+      <h2>ZAISKRI.</h2>
+    </footer>
+
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+      integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(() => {
+        var dialog, form;
+
+        function sendMail() {
+          var valid = true;
+
+          let name = $("#name").val();
+          let email = $("#email").val();
+          let importance = $("#importance").val();
+          let message = $("#message").val();
+          let newsletter = $("#newsletter").prop("checked");
+
+          let body = {
+            name,
+            email,
+            importance,
+            message,
+            newsletter,
+          };
+          console.log(body);
+
+          $.ajax({
+            type: "POST",
+            url: "https://www.fulek.com/VUA/SUPIT/ContactUs",
+            data: body,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function () {
+              alert("Poruka uspješno poslana!");
+            },
+            failure: function () {
+              alert(`Poruka nije poslana: \n${err}`);
+            },
+          });
+
+          dialog.dialog("close");
+          return valid;
+        }
+
+        dialog = $("#dialog-form").dialog({
+          autoOpen: false,
+          height: 450,
+          width: 600,
+          resizible: false,
+          modal: true,
+          buttons: {
+            Pošalji: sendMail,
+            Odustani: function () {
+              dialog.dialog("close");
+            },
+          },
+          close: function () {
+            form[0].reset();
+            // allFields.removeClass( "ui-state-error" );
+          },
+        });
+
+        form = dialog.find("form").on("submit", function (event) {
+          event.preventDefault();
+          sendMail();
+        });
+
+        $("#contact-user")
+          // .button()
+          .on("click", function () {
+            dialog.dialog("open");
+          });
+      });
+    </script>
+
+    <div id="dialog-form" title="Kontaktirajte nas">
+      <form>
+        <fieldset>
+          <label for="name">Puno ime:</label>
+
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="text ui-widget-content ui-corner-all"
+          />
+          <label for="email">E-mail:</label>
+          <input
+            type="email"
+            id="email"
+            class="text ui-widget-content ui-corner-all"
+          />
+          <label for="importance">Važnost poruke:</label>
+          <select id="importance" style="margin-bottom: 12px">
+            <option>Visoka</option>
+            <option>Niska</option>
+          </select>
+          <label for="message">Vaša poruka:</label>
+
+          <textarea
+            id="message"
+            text
+            ui-widget-content
+            ui-corner-all
+            style="resize: vertical; width: 95%"
+          ></textarea>
+          <label for="newsletter">Primaj newsletter:</label>
+          <input id="newsletter" type="checkbox" />
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>

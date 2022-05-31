@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link href="./css/NewsTwo.css" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"
+    />
+    <title>SUPIT-projektni zadatak</title>
+  </head>
+  <body>
+    <header class="heading">
+      <nav class="navigate">
+        <img
+          src="img/Algebra-logo.png"
+          alt="Algebra logo"
+          height="50"
+          width="50"
+        />
+        <a href="index.html"> <ion-icon name="home"></ion-icon> Početna </a>
+        <a href="O-nama.html">
+          <ion-icon name="chatbubbles"></ion-icon> O nama
+        </a>
+        <a href="Novosti.html">
+          <ion-icon name="information-circle"></ion-icon> Novosti
+        </a>
+        <a href="NastavniPlan.html">
+          <ion-icon name="newspaper"></ion-icon> Nastavni plan
+        </a>
+        <a id="contact-user"> <ion-icon name="mail"></ion-icon> Kontakt </a>
+      </nav>
+    </header>
+
+    <article>
+      <div class="naslovna-picture">
+        <p class="text-naslovna-picture">
+          Nagrađujemo izvrsnost: Objavljujemo dobitnike stipendijskog natječaja
+          šk.god. 2018./2019.!
+        </p>
+      </div>
+      <h1>Stipendijski natječaj šk.god. 2018./2019.</h1>
+      <div style="width: 100%; display: flex; justify-content: center">
+        <p class="text">
+          Nakon velikog broja prijava koje smo primili, detaljnom analizom i
+          provjerom utvrdili smo dobitnike ovogodišnjeg stipendijskog natječaja
+          za maturante! Stipendiju u vrijednosti od 10.000,00 kuna na
+          potrošačkoj kartici dobivaju: Heidi Sokolovski iz Zagreba - za
+          najbolji rezultat iz Matematike na A razini osvojila je stipendiju u
+          iznosu od 10.000,00 kn. Tereza Žugaj iz Zagreba - za najbolji rezultat
+          iz Matematike na B razini osvojila je stipendiju u iznosu od 10.000,00
+          kn. Dalija Romac iz Sinja - za najbolji rezultat iz Hrvatskog jezika
+          na A razini te dodatna 204 boda za rezultat iz Matematike A i
+          Engleskog jezika A osvojila je stipendiju u iznosu od 10.000,00 kn.
+          Ella Milinović iz Zagreba - za najbolji rezultat iz Hrvatskog jezika
+          na B razini osvojila je stipendiju u iznosu od 10.000,00 kn. Borna
+          Skračić iz Zadra – za najbolji rezultat iz Engleskog jezika na A
+          razini osvojio je stipendiju u iznosu od 10.000,00 kn. Lukas Božić iz
+          Umaga - za najbolji rezultat iz Engleskog jezika na B razini osvojio
+          je stipendiju u iznosu od 10.000,00 kn.
+        </p>
+      </div>
+    </article>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
+    ></script>
+    <footer>
+      <h1>BUDI IZVRSTAN U ONOM ŠTO VOLIŠ</h1>
+      <h2>ZAISKRI.</h2>
+    </footer>
+
+    <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+    <script
+      src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+      integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      $(document).ready(() => {
+        var dialog, form;
+
+        function sendMail() {
+          var valid = true;
+
+          let name = $("#name").val();
+          let email = $("#email").val();
+          let importance = $("#importance").val();
+          let message = $("#message").val();
+          let newsletter = $("#newsletter").prop("checked");
+
+          let body = {
+            name,
+            email,
+            importance,
+            message,
+            newsletter,
+          };
+          console.log(body);
+
+          $.ajax({
+            type: "POST",
+            url: "https://www.fulek.com/VUA/SUPIT/ContactUs",
+            data: body,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function () {
+              alert("Poruka uspješno poslana!");
+            },
+            failure: function () {
+              alert(`Poruka nije poslana: \n${err}`);
+            },
+          });
+          dialog.dialog("close");
+          // }
+          return valid;
+        }
+
+        dialog = $("#dialog-form").dialog({
+          autoOpen: false,
+          height: 450,
+          width: 600,
+          resizible: false,
+          modal: true,
+          buttons: {
+            Pošalji: sendMail,
+            Odustani: function () {
+              dialog.dialog("close");
+            },
+          },
+          close: function () {
+            form[0].reset();
+            // allFields.removeClass( "ui-state-error" );
+          },
+        });
+
+        form = dialog.find("form").on("submit", function (event) {
+          event.preventDefault();
+          sendMail();
+        });
+
+        $("#contact-user")
+          // .button()
+          .on("click", function () {
+            dialog.dialog("open");
+          });
+      });
+    </script>
+
+    <div id="dialog-form" title="Kontaktirajte nas">
+      <form>
+        <fieldset>
+          <label for="name">Puno ime:</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            class="text ui-widget-content ui-corner-all"
+          />
+          <label for="email">E-mail:</label>
+          <input
+            type="email"
+            id="email"
+            class="text ui-widget-content ui-corner-all"
+          />
+          <label for="importance">Važnost poruke:</label>
+          <select id="importance" style="margin-bottom: 12px">
+            <option>Visoka</option>
+            <option>Niska</option>
+          </select>
+          <label for="message">Vaša poruka:</label>
+          <textarea
+            id="message"
+            text
+            ui-widget-content
+            ui-corner-all
+            style="resize: vertical; width: 95%"
+          ></textarea>
+          <label for="newsletter">Primaj newsletter:</label>
+          <input id="newsletter" type="checkbox" />
+        </fieldset>
+      </form>
+    </div>
+  </body>
+</html>

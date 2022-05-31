@@ -1,0 +1,258 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  position: relative;
+  align-items: center;
+  align-content: center;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100px;
+  width: 100%;
+  padding-left: 40px;
+  background-color: black;
+}
+
+.navigate {
+  display: flex;
+  align-items: center;
+}
+
+.navigate a {
+  margin-left: 20px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+a:link {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:visited {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  color: #fcc419;
+  font-weight: bold;
+  text-decoration: none;
+}
+a:active {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+.button-contakt {
+  color: black;
+  background-color: black;
+}
+
+div.button-contakt button {
+  background: none !important;
+  border: none;
+  margin-left: 20px;
+  padding: 0 !important;
+  color: white !important;
+  text-align: left;
+  text-decoration: none;
+  font-weight: bold;
+  /*optional*/
+  font-family: sans-serif !important;
+  font-size: 16px;
+
+  cursor: pointer;
+}
+
+label,
+input {
+  /* display: block; */
+}
+
+input.text {
+  margin-bottom: 12px;
+  width: 95%;
+  padding: 0.4em;
+}
+
+fieldset {
+  padding: 0;
+  border: 0;
+  margin-top: 25px;
+}
+
+.ui-dialog .ui-state-error {
+  padding: 0.3em;
+}
+
+.validateTips {
+  border: 1px solid transparent;
+
+  padding: 0.3em;
+}
+
+.sve {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 350px;
+}
+
+.lijevo {
+  text-align: center;
+  padding: 24px;
+  animation: 1s ease-in-out TekstUlet;
+}
+
+.desno {
+  padding: 24px;
+  animation: 1s ease-in-out TekstUlet;
+}
+
+/*------*/
+.navigate {
+  display: flex;
+  padding: 15px;
+  /* padding-bottom: -15px; */
+  /* margin-bottom: -15px; */
+  width: 100%;
+  position: sticky;
+}
+
+h2 {
+  color: #a61e4d;
+}
+
+body {
+  height: 100vh;
+  z-index: 1;
+  /* margin-top: 100px; */
+  /* padding-top: 30px; */
+}
+
+main {
+  margin: auto;
+  /* display: flex; */
+  padding-top: 50px;
+}
+
+.naslov {
+  width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 4px solid #fcc419;
+  margin-inline: 25%;
+  animation: 1s ease-in-out NaslovUlet;
+}
+
+@keyframes NaslovUlet {
+  0% {
+    transform: translateY(50%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+@keyframes TekstUlet {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.tablica {
+  /* width: 70%;
+  margin: auto;
+  margin-top: 80px; */
+}
+
+.tablica table {
+  border-collapse: collapse;
+  border-spacing: 20px;
+  text-align: left;
+  /* width: 60%; */
+  background-color: white;
+}
+
+.tablica table thead {
+  border-block: 2px solid rgb(189, 189, 189);
+}
+
+.tablica table thead th {
+  padding: 4px 0;
+  padding-right: 20px;
+}
+
+.tablica table tbody tr:nth-child(odd) {
+  background-color: rgb(209, 209, 209);
+}
+
+.tablica table tfoot tr {
+  border-top: 3px solid black;
+  font-weight: bold;
+}
+
+.tablica table tbody tr td {
+  padding: 4px 0;
+  margin-right: 25px;
+}
+
+.total {
+  color: #d2042d;
+}
+
+.delbtn {
+  padding: 3px 5px;
+  border-radius: 4px;
+  border: 1px solid #d2042d;
+  background-color: #d2042d;
+  color: white;
+  margin-block: 10px;
+  margin-inline: 15px;
+}
+
+footer {
+  display: flex;
+  height: 250px;
+  flex-direction: column;
+  justify-content: center;
+  background-image: url("../img/zaiskri-bg.jpg");
+  background-size: cover;
+  filter: brightness(90%);
+}
+
+footer > h1 {
+  color: white;
+  width: 100%;
+  margin: 0;
+  border: none;
+  text-align: center;
+  font-size: 45px;
+  font-weight: bolder;
+  text-shadow: 1px 1px black;
+}
+
+footer > h2 {
+  font-size: 45px;
+  margin: 0 auto;
+}
